@@ -1,0 +1,6 @@
+server:
+  port: 8081
+girl:
+  cpuSize: F
+  age: 18
+#content: "cupSize: ${cpuSize}, age: ${age}"
