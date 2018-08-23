@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "girl")
-public class GrilProperties {
+public class GrilProperties  extends Object
+{
 
 	
 	
