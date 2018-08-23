@@ -1,4 +1,4 @@
-package com.rock;
+package com.rock.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

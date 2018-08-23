@@ -1,9 +1,12 @@
-package com.rock;
+package com.rock.service;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.rock.domain.Girl;
+import com.rock.repository.GirlRepository;
 
 @Service
 public class GirlService {

@@ -1,9 +1,14 @@
-package com.rock;
+package com.rock.controller;
 
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,9 +17,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rock.domain.Girl;
+import com.rock.repository.GirlRepository;
+import com.rock.service.GirlService;
+
 @RestController
 public class girlontroller {
-	
+	private final static Logger logger = LoggerFactory.getLogger(girlontroller.class);
+
 	@Autowired
 	private GirlRepository girlRepository;
 	@Autowired
@@ -25,14 +35,17 @@ public class girlontroller {
 	 */
 	@GetMapping(value="/girls")
 	public List<Girl> girlList(){
+		logger.info("girlList 方法");
 		return girlRepository.findAll();
 	}
 	@PostMapping(value = "/girls")
-	public Girl grilAdd(@RequestParam("cupSize") String cupSize,
-						@RequestParam("age") Integer  age) {
-		Girl girl=new Girl();
-		girl.setCupSize(cupSize);
-		girl.setAge(age);
+	public Girl grilAdd(@Valid Girl girl,BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			System.out.println(bindingResult.getFieldError().getDefaultMessage());
+			return null;
+		}
+		girl.setCupSize(girl.getCupSize());
+		girl.setAge(girl.getAge());
 		return girlRepository.save(girl);
 	}
 	//查询
