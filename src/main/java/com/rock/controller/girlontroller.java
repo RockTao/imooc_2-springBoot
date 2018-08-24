@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rock.domain.Girl;
+import com.rock.domain.Result;
 import com.rock.repository.GirlRepository;
 import com.rock.service.GirlService;
+import com.rock.util.ResultUtil;
 
 @RestController
 public class girlontroller {
@@ -39,14 +41,13 @@ public class girlontroller {
 		return girlRepository.findAll();
 	}
 	@PostMapping(value = "/girls")
-	public Girl grilAdd(@Valid Girl girl,BindingResult bindingResult) {
+	public Result<Girl> grilAdd(@Valid Girl girl,BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
-			System.out.println(bindingResult.getFieldError().getDefaultMessage());
-			return null;
+			return ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
 		}
 		girl.setCupSize(girl.getCupSize());
 		girl.setAge(girl.getAge());
-		return girlRepository.save(girl);
+		return ResultUtil.success(girlRepository.save(girl));
 	}
 	//查询
 	@GetMapping(value="/girls/{id}")
@@ -86,5 +87,12 @@ public class girlontroller {
 	public  void grilTwo() {
 		girlService.insertTwo();
 	}
+	
+	
+	@PostMapping(value="/girls/getAge/{id}")
+	public void getAge(@PathVariable("id") Integer id) {
+		girlService.getAge(id);
+	}
+	
 	
 }
