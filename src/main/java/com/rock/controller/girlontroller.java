@@ -91,7 +91,7 @@ public class girlontroller {
 	
 	@PostMapping(value="/girls/getAge/{id}")
 	public void getAge(@PathVariable("id") Integer id) {
-		girlService.getAge(id);
+//		girlService.getAge(id);
 	}
 	
 	

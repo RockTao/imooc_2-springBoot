@@ -1,0 +1,8 @@
+mvn clean package
+打包的时候测试
+
+不管是compile、package还是install等前三个步骤都是必不可少的。
+
+eclipse自动生成junit测试文件
+
+eclipse移动对应的方法到一个新的类中，直接用  refactor-->moveTo 方法
